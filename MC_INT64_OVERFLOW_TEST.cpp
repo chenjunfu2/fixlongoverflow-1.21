@@ -133,7 +133,7 @@ void Test(const Box &box)
 
 int main(void)
 {
-	double testval = 33554418.0;//33554418.0 ~ 33554433.9之间的取值都会崩
+	double testval = 33554414.0;//[33554414.0, 33554434.0)之间的取值都会崩
 	Test(Box{ testval,0,0,testval,0,0 });
 
 	return 0;
