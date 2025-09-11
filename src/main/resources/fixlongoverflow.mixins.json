@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "chenjunfu2.fixlongoverflow.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"SectionedEntityCacheMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

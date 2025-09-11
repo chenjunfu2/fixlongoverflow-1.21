@@ -1,0 +1,28 @@
+{
+	"schemaVersion": 1,
+	"id": "fixlongoverflow",
+	"version": "${version}",
+	"name": "Fixlongoverflow",
+	"description": "fix long overflow",
+	"authors": [
+		"chenjunfu2"
+	],
+	"contact": {
+	},
+	"license": "CC0-1.0",
+	"environment": "*",
+	"entrypoints": {
+	},
+	"mixins": [
+		"fixlongoverflow.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
