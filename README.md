@@ -18,7 +18,7 @@
 查看ChunkSectionPos::asLong代码，发现asLong里面是位运算拼接的，根据实际情况来看，只有第一个p会影响，也就是这里的x，因为ChunkSectionPos::asLong(p, -1, -1)导致y、z全是-1，所以都不影响</br>
 <img width="544" height="170" alt="HQEG(X)`WT51HSTXTP_YF28" src="https://github.com/user-attachments/assets/712e72e1-ed10-47e8-ac66-12a55a98464e" /></br>
 </br>
-而根据他的运算得出x实际上是高63~42位共22bit，所以我们需要构造一个最高位为0其他位全为1的数，正是因为麻将别的y、z都刚好是-1（二进制位全1），</br>
+而根据他的运算得出x实际上是高63\~42位共22bit，所以我们需要构造一个最高位为0其他位全为1的数，正是因为麻将别的y、z都刚好是-1（二进制位全1），</br>
 只有x能改变且x刚好是高位，所以4194303 >> 1 = 2,097,151(相当于给这个22bit数的高位置0)之后的值给这个函数最后可以得出一个最高位为0其他位全为1的数</br>
 <img width="900" height="354" alt="image" src="https://github.com/user-attachments/assets/d5dccffd-a582-4c01-a131-a07559a25c18" /></br>
 <img width="900" height="352" alt="image" src="https://github.com/user-attachments/assets/754246d2-b644-40cf-91e4-10edad15d4db" /></br>
