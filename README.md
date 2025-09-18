@@ -38,9 +38,9 @@ getSectionCoord对值调用了Math::floor后再次重载后对值除以16（原�
 查看Math::floor的代码发现其实就是个类型转换，直接舍弃浮点位数，然后在舍弃后原值小于目标值（也就是负数）的情况下对目标值-1保证负数符合预期：</br>
 <img width="319" height="86" alt="image" src="https://github.com/user-attachments/assets/c1771132-4a3d-41b9-9570-7f8b4730e4a8" /></br>
 </br>
-我们目前的值是个正数，所以直接不变，相当于box.minX - 2.0或者box.maxX + 2.0之后只要任意满足一个能得到我们的值，就至少可以触发bug，于是：</br>
-至少box.minX = 33,554,416.0 + 2.0 = 33,554,418.0，或者box.maxX = 33,554,416.0 - 2.0 = 33,554,416.0之间会触发，所以编写了一个测试案例：</br>
-<img width="350" height="198" alt="image" src="https://github.com/user-attachments/assets/d4c69c45-102a-429e-8e77-ecd84d030f08" /></br>
+我们目前的值是个正数，所以直接不变，相当于box.minX - 2.0之后就能得到我们的值box.minX = 33,554,416.0 + 2.0 = 33,554,418.0，</br>
+因为min到max之间有4的差值，这样就至少可以触发bug，于是编写了一个测试案例：</br>
+<img width="346" height="205" alt="image" src="https://github.com/user-attachments/assets/b8e5aec1-e50a-4932-8ed9-734ec0adf9b5" /></br>
 </br>
 跑一下看结果：</br>
 <img width="1049" height="822" alt="image" src="https://github.com/user-attachments/assets/0687c13c-a80b-42de-b5a7-93e4586d8e8c" /></br>
