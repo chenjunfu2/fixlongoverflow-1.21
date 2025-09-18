@@ -40,7 +40,7 @@ getSectionCoord对值调用了Math::floor后再次重载后对值除以16（原�
 </br>
 我们目前的值是个正数，所以直接不变，相当于box.minX - 2.0或者box.maxX + 2.0之后只要任意满足一个能得到我们的值，就至少可以触发bug，于是：</br>
 至少box.minX = 33,554,416.0 + 2.0 = 33,554,418.0，或者box.maxX = 33,554,416.0 - 2.0 = 33,554,416.0之间会触发，所以编写了一个测试案例：</br>
-<img width="397" height="208" alt="image" src="https://github.com/user-attachments/assets/d03162ff-81c1-4cce-b7a1-da7413e83028" /></br>
+<img width="350" height="198" alt="image" src="https://github.com/user-attachments/assets/d4c69c45-102a-429e-8e77-ecd84d030f08" /></br>
 </br>
 跑一下看结果：</br>
 <img width="1049" height="822" alt="image" src="https://github.com/user-attachments/assets/0687c13c-a80b-42de-b5a7-93e4586d8e8c" /></br>
