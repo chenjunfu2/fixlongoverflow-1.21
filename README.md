@@ -7,7 +7,7 @@
 </br>
 # c++复现案例
 [MC_INT64_OVERFLOW_TEST.cpp](MC_INT64_OVERFLOW_TEST.cpp)</br>
-**得出方式**
+**得出方式**</br>
 关键问题就是麻将的代码用的subset取值，但是因为subset不包含上边界，</br>
 麻将大聪明为了包含上边界直接给值+1L导致如果是LONG_MAX+1L==LONG_MIN，</br>
 然后起始值大于结束值触发Java的IAE异常Start element is larger than end element（苦笑）</br>
