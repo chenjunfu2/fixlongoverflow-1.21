@@ -43,6 +43,17 @@ getSectionCoord对值调用了Math::floor后再次重载后对值除以16（原�
 <img width="346" height="205" alt="image" src="https://github.com/user-attachments/assets/b8e5aec1-e50a-4932-8ed9-734ec0adf9b5" /></br>
 </br>
 跑一下看结果：</br>
-<img width="1049" height="822" alt="image" src="https://github.com/user-attachments/assets/0687c13c-a80b-42de-b5a7-93e4586d8e8c" /></br>
+<img width="1049" height="822" alt="image" src="https://github.com/user-attachments/assets/0687c13c-a80b-42de-b5a7-93e4586d8e8c" /></br
+</br>
+唉，这时候聪明的朋友就要问了，不是只算出来一个值吗，为什么是一个范围呢？很简单，还记得之前的"getSectionCoord对值调用了Math::floor后再次重载后对值除以16（原始Java代码是>>4）"吗？</br>
+这个操作其实忽略了对浮点消去尾数后的整数的低4位（因为是区块坐标所以除以16），这就导致了低4位有浮动空间，反正这低4位是什么0000~1111之间的范围都不影响最终得出的结果：2,097,151</br>
+那么简单算一下，前面是2,097,151 * 16 = 33,554,416，低4位都为0，到低4位都为1，相当于：33,554,416 ~ 33,554,431：</br>
+<img width="900" height="679" alt="image" src="https://github.com/user-attachments/assets/1d3f5b4d-918f-4e2a-9292-fa715ece63d9" /></br>
+<img width="900" height="679" alt="image" src="https://github.com/user-attachments/assets/c47e00d5-699c-4b84-a92b-131369cb59e1" /></br>
+所以，只要你的box.minX在函数内被-2.0之后或者box.maxX在函数内被+2.0之后的结果是在33,554,416 ~ 33,554,431中间（端点可去到），就会照样触发异常</br>
+根据测试出来的结果[33554414.0,33554434.0)速算一下：33554414.0 - 2.0->33554412到33554414.0 + 2.0->33554416之间的最大值33554416刚好碰到了33,554,416，</br>
+而33554434.0 - 2.0->33554432到33554434.0 + 2.0->33554436</br>之间的最小值33554432刚好离开了33,554,431，所以满足触发条件，程序崩溃</br>
+</br>
+就写到这里吧，分析的应该是没问题的，如果有问题还请大佬指出，谢谢！</br>
 
 
