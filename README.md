@@ -42,7 +42,7 @@ getSectionCoord对值调用了Math::floor后再次重载后对值除以16（原�
 <img width="346" height="205" alt="image" src="https://github.com/user-attachments/assets/b8e5aec1-e50a-4932-8ed9-734ec0adf9b5" /></br>
 </br>
 跑一下看结果：</br>
-<img width="1049" height="822" alt="image" src="https://github.com/user-attachments/assets/0687c13c-a80b-42de-b5a7-93e4586d8e8c" /></br
+<img width="1049" height="822" alt="image" src="https://github.com/user-attachments/assets/0687c13c-a80b-42de-b5a7-93e4586d8e8c" /></br>
 </br>
 唉，这时候聪明的朋友就要问了，不是只算出来一个值吗，为什么是一个范围呢？很简单，还记得之前的"getSectionCoord对值调用了Math::floor后再次重载后对值除以16（原始Java代码是>>4）"吗？</br>
 这个操作其实忽略了对浮点消去尾数后的整数的低4位（因为是区块坐标所以除以16），这就导致了低4位有浮动空间，反正这低4位是什么0000~1111之间的范围都不影响最终得出的结果：2,097,151</br>
