@@ -107,7 +107,6 @@ void subSet(int64_t fromElement, int64_t toElement)
 	if (fromElement > toElement)
 	{
 		printf("IllegalArgumentException: Start element (%lld) is larger than end element (%lld)\n", fromElement, toElement);
-		exit(-1);
 	}
 }
 
@@ -133,8 +132,16 @@ void Test(const Box &box)
 
 int main(void)
 {
-	double testval = 33554414.0;//[33554414.0, 33554434.0)之间的取值都会崩
-	Test(Box{ testval,0,0,testval,0,0 });
+	//计算的值：33,554,418.0
+	//在附近遍历调用查看崩溃范围
+	for (double i = 33554410.0; i <= 33554438.0; ++i)
+	{
+		printf("current: %.4lf\n", i);
+		//+2.0和-2.0是为了弥补Minx被-2.0与Maxx被+2.0的差值，
+		//以确认box的上下限只要触碰到哪个范围就会崩溃
+		Test(Box{ i + 2.0,0,0,i - 2.0,0,0 });
+	}
+	//测试发现，值在[33554412.0,33554436.0)之间则触发异常
 
 	return 0;
 }
