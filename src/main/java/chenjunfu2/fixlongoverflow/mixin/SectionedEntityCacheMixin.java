@@ -16,7 +16,9 @@ public class SectionedEntityCacheMixin
 	)
 	private LongSortedSet forEachInBoxMixin(LongSortedSet instance, long l, long r)
 	{
-		if(l > r && (r - 1L) == Long.MAX_VALUE)
+		//入参已经被麻将+1了，所以检查是否是最小值已确认是否溢出，
+		//但是在这之前还需要确认l>r以防止本身l和r都是最小值的情况
+		if(l > r && r == Long.MIN_VALUE)
 		{
 			return instance.tailSet(l);//r是最大值，变为右区间完全包含
 		}
