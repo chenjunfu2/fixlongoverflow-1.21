@@ -1,5 +1,5 @@
 # fixlongoverflow-1.21
-修复实体box.minX或者box.maxX坐标取值在[33554412.0,33554436.0)导致游戏IllegalArgumentException崩溃</br>
+修复实体box.minX或者box.maxX坐标取值在[33554414.0,33554434.0)导致游戏IllegalArgumentException崩溃</br>
 输出java.lang.IllegalArgumentException: Start element (9223367638808264704) is larger than end element (-9223372036854775808)的bug</br>
 </br>
 我修的想法是如果这个r是LONG_MAX，那么r+1溢出变成LONG_MIN，所以我直接在起始值大于结束值(l>r)的情况下，</br>
