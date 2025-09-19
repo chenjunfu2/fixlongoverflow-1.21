@@ -3,7 +3,7 @@
 输出java.lang.IllegalArgumentException: Start element (9223367638808264704) is larger than end element (-9223372036854775808)的bug</br>
 </br>
 我修的想法是如果这个r是LONG_MAX，那么r+1溢出变成LONG_MIN，所以我直接在起始值大于结束值(l>r)的情况下，</br>
-判断r-1是不是LONG_MAX，如果是那么直接替换到tailSet(l)，不过没想到别的注入方式，所以用了很丑陋的@Redirect，大佬们轻喷</br>
+判断r是不是LONG_MIN，如果是那么直接替换到tailSet(l)，不过没想到别的注入方式，所以用了很丑陋的@Redirect，大佬们轻喷</br>
 </br>
 # c++复现案例
 代码：[MC_INT64_OVERFLOW_TEST.cpp](MC_INT64_OVERFLOW_TEST.cpp)</br>
