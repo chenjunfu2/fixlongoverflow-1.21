@@ -19,7 +19,7 @@
 <img width="544" height="170" alt="HQEG(X)`WT51HSTXTP_YF28" src="https://github.com/user-attachments/assets/712e72e1-ed10-47e8-ac66-12a55a98464e" /></br>
 </br>
 而根据他的运算得出x实际上是高63\~42位共22bit，所以我们需要构造一个最高位为0其他位全为1的数，正是因为麻将别的y、z都刚好是-1（二进制位全1），</br>
-只有x能改变且x刚好是高位，所以4194303 >> 1 = 2,097,151(相当于给这个22bit数的高位置0)之后的值给这个函数最后可以得出一个最高位为0其他位全为1的数</br>
+只有x能改变且x刚好是高位，所以4194303 >> 1 = 2,097,151(相当于给这个22bit数的高位置0)之后的值，传递给这个函数后可以得出一个\"最高位为0且其他位全为1的数\"</br>
 <img width="900" height="354" alt="image" src="https://github.com/user-attachments/assets/d5dccffd-a582-4c01-a131-a07559a25c18" /></br>
 <img width="900" height="352" alt="image" src="https://github.com/user-attachments/assets/754246d2-b644-40cf-91e4-10edad15d4db" /></br>
 </br>
@@ -30,7 +30,7 @@
 ChunkSectionPos::getSectionCoord(box.maxX + 2.0)能得出2,097,151，于是进入函数内部查看，发现是如下情况：</br>
 <img width="854" height="142" alt="image" src="https://github.com/user-attachments/assets/5a17780b-d6ad-43c7-9e71-c170a2ede401" /></br>
 </br>
-getSectionCoord对值调用了Math::floor后再次重载后对值除以16（原始Java代码是>>4），cpp不能保证是无符号或者有符号位移，但是这里和整数乘法效果相当所以直接写整数除法</br>
+getSectionCoord对值调用了Math::floor后再次重载后对值除以16（原始Java代码是>>4），cpp不能保证是无符号或者有符号位移，但是这里和整数除法效果相当，所以直接写整数除法</br>
 那既然是对目标值除以16后得到的2,097,151，反过来2,097,151 * 16就能得到Math::floor之后的值为33,554,416：</br>
 <img width="900" height="355" alt="image" src="https://github.com/user-attachments/assets/3a998396-d49c-4104-aa57-fdeeaae66afa" /></br>
 </br>
